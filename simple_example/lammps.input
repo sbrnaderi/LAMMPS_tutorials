@@ -1,0 +1,26 @@
+
+# Initialization
+units		lj
+dimension	2
+atom_style	atomic
+
+# Atom definition
+lattice		sq	0.1
+region		simbox	block 0 20 0 20 -0.1 0.1
+create_box	1 simbox
+create_atoms	1 box
+
+# Settings
+
+pair_style	lj/cut 2.5
+pair_coeff	* * 1 1
+
+mass		* 1.0
+velocity	all create 1.0 23494
+
+# Run
+
+fix	1 all nve
+dump	1 all custom 10 lammps.out id xs ys zs
+
+run		1000
